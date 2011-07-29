@@ -2,6 +2,8 @@ module PlymsoftwareCore
   module ActiveRecord
     module User
       def is_user
+        attr_accessible :email, :first_name, :last_name, :password
+        
         validates :email, :presence => true
 
         validates :first_name, :presence => true
