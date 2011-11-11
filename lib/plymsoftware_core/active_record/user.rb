@@ -2,7 +2,7 @@ module PlymsoftwareCore
   module ActiveRecord
     module User
       def is_user
-        attr_accessible :email, :first_name, :last_name, :password
+        attr_accessible :name, :email, :first_name, :last_name, :password
         
         validates :email, :presence => true
 
@@ -14,6 +14,7 @@ module PlymsoftwareCore
         
         extend Scopes
         extend SingletonMethods
+
         include InstanceMethods
       end
       
@@ -41,8 +42,8 @@ module PlymsoftwareCore
 
         def name=(value)
           self.first_name = self.last_name = nil
-
           return nil if value.blank?
+
           parts = value.split(' ')
 
           self.last_name = parts.delete_at(parts.count - 1)
