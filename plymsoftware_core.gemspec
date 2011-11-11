@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = 'plymsoftware_core'
-  s.version = '0.0.1'
-  s.date = '2011-07-28'
+  s.version = '0.0.2'
+  s.date = '2011-11-11'
   s.summary = 'Plymouth Software Core App'
   s.description = 'A lightweight, simple gem providing mixins for basic app core functionality (e.g. authentication).'
   s.authors = ['Chris Blunt']
@@ -13,4 +13,3 @@ Gem::Specification.new do |s|
   ]
   s.homepage = 'http://plymouthsoftware.com'
 end
-
