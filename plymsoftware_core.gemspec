@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.files = [
     'lib/plymsoftware_core.rb',
     'lib/plymsoftware_core/active_record/user.rb',
-    'lib/plymsoftware_core/action_controller/authentication.rb'
+    'lib/plymsoftware_core/action_controller/authentication.rb',
     'lib/plymsoftware_core/action_view/helpers/content_helpers.rb',
     'lib/plymsoftware_core/railtie.rb'
   ]
