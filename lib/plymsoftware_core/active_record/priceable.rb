@@ -2,7 +2,7 @@ module PlymsoftwareCore
   module ActiveRecord
     module Priceable
       def has_price
-        @@price_scaler = 1000.0
+        @@price_scalar = 1000.0
         cattr_accessor :price_scalar
 
         attr_accessible :price
