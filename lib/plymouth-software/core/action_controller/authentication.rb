@@ -35,5 +35,3 @@ module PlymouthSoftware
     end
   end
 end
-
-ActionController::Base.extend PlymouthSoftware::Core::ActionController::Authentication

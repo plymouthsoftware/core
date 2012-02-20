@@ -78,5 +78,3 @@ module PlymouthSoftware
     end
   end
 end
-
-ActiveRecord::Base.extend PlymouthSoftware::Core::ActiveRecord::User
