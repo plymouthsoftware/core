@@ -20,5 +20,8 @@ Gem::Specification.new do |s|
 
   # specify any dependencies here; for example:
   s.add_development_dependency "rspec"
+  s.add_development_dependency "activerecord", "~> 3.0.0"
+
   # s.add_runtime_dependency "rest-client"
+  # s.add_runtime_dependency "activerecord", "~> 3.0.0"
 end
