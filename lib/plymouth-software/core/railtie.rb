@@ -1,7 +1,9 @@
 module PlymouthSoftware
-  class CoreRailtie < ::Rails::Railtie
-    initializer "plymouth_software.core_railtie_mixin_content_helpers" do |app|
-      ::ActionView::Base.send :include, ::PlymouthSoftware::Core::ActionView::Helpers::ContentHelpers
+  module Core
+    class Railtie < ::Rails::Railtie
+      ::ActionView::Base.send :include, ActionView::Helpers::ContentHelpers
+      ::ActiveRecord::Base.extend ActiveRecord::User
+      ::ActiveRecord::Base.extend ActiveRecord::Priceable
     end
   end
 end
