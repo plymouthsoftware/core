@@ -3,15 +3,15 @@ module PlymouthSoftware
     module ActiveRecord
       module User
         def is_user
-          attr_accessible :name, :email, :first_name, :last_name, :password
+          attr_accessible :name, :email, :first_name, :last_name, :password, :password_confirmation
           
           validates :email, :presence => true
 
           validates :first_name, :presence => true
           validates :last_name, :presence => true
-
           validates :password, :confirmation => true
-          validates :password_hash, :presence => true
+
+          has_secure_password
           
           extend Scopes
           extend SingletonMethods
@@ -21,18 +21,17 @@ module PlymouthSoftware
         
         module SingletonMethods
           def authenticate_with_email_and_password(email_address, pass)
-            user = self.find_by_email(email_address)
-            if user && user.password_hash == Digest::SHA2.hexdigest(pass + user.password_salt)
-              return user
-            end
-            
-            nil
+            verified.active.find_by_email(email_address).try(:authenticate, pass)
           end
         end
 
         module Scopes
           def active
-            where('active = ?', true)
+            where(:active => true)
+          end
+
+          def verified
+            where('verified_at IS NOT NULL')
           end
         end
 
@@ -57,21 +56,8 @@ module PlymouthSoftware
             ! self.verified_at.blank? 
           end
 
-          def verify!
-            update_attribute(:verified_at, Time.now)
-          end
-
-          def password
-            @password
-          end
-
-          def password=(pass)
-            @password = pass
-
-            self.password_salt = Digest::SHA2.hexdigest(Time.now.to_s + rand(1000).to_s)
-            self.password_hash = Digest::SHA2.hexdigest(@password + password_salt)
-
-            self.password_hash
+          def verify!(token = nil)
+            update_attribute(:verified_at, Time.now) if token == self.verification_token
           end
         end
       end
