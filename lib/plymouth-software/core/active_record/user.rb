@@ -31,7 +31,7 @@ module PlymouthSoftware
           end
 
           def verified
-            where('verified_at IS NOT NULL')
+            where(:verified => true)
           end
         end
 
@@ -52,12 +52,8 @@ module PlymouthSoftware
             name
           end
 
-          def verified?
-            ! self.verified_at.blank? 
-          end
-
           def verify!(token = nil)
-            update_attribute(:verified_at, Time.now) if token == self.verification_token
+            update_attribute(:verified, true) if token == self.verification_token
           end
         end
       end

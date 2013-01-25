@@ -19,7 +19,7 @@ Plymouth Software - Core
 
 1. Create a User model:
 
-        $ rails generate model user first_name:string last_name:string email:string password_hash:string password_digest:string verified_at:datetime active:boolean verification_token:string
+        $ rails generate model user first_name:string last_name:string email:string password_hash:string password_digest:string verified:boolean active:boolean verification_token:string
 
         $ rake db:migrate
 
