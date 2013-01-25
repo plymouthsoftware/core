@@ -12,6 +12,8 @@ module PlymouthSoftware
           validates :password, :confirmation => true
 
           has_secure_password
+
+          before_save :generate_verification_token!, :if => :needs_verifying?
           
           extend Scopes
           extend SingletonMethods
@@ -54,6 +56,19 @@ module PlymouthSoftware
 
           def verify!(token = nil)
             update_attribute(:verified, true) if token == self.verification_token
+          end
+
+          def needs_verifying?
+            self.new_record? || self.email_changed?
+          end
+
+        protected
+          
+          def generate_verification_token!
+            self.verified = false
+            self.verification_token = UUID.generate(:compact)
+            
+            self.verification_token
           end
         end
       end
